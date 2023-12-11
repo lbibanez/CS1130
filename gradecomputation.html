@@ -1,0 +1,164 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset = "utf-8">
+		<title>Grade Calculator</title>
+		<link rel="stylesheet" href="styles.css">
+	</head>
+	<body>
+		<style>
+			input, label{
+			text-align: right;
+		}
+		
+		@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&family=Poppins:wght@300&display=swap');
+		body {
+			font-family: 'Poppins', sans-serif;
+			background-color: white;
+			color: black;
+			margin-right: 10%;
+			margin-left: 10%;
+			margin-top: 1%;
+		}
+
+		button{
+			font-family: 'Poppins', sans-serif;
+			color: black;
+			background-color: white;
+			border: 1px solid black;
+			border-radius: 5px;
+			transition: all 0.5s;
+		}
+
+		button:hover{
+			color: white;
+			background-color: black;
+			transition: all 0.5s;
+		}
+
+		.HomeBox{
+			letter-spacing: normal;
+			padding: 5px;
+			font-family: 'Poppins', sans-serif;
+			color: black;
+			background-color: white;
+			border: 1px solid black;
+			border-radius: 5px;
+			transition: all 0.5s;
+		}
+
+		.HomeBox:hover{
+			color: white;
+			background-color: black;
+			transition: all 0.5s;
+		}
+		</style>
+		<center>
+		<h1>Welcome to the Grade Calculator!</h1>
+		<br>
+		<h2>Please input your score, items, and base:</h2>
+		<label class="calc_label" for="score">Score:</label>
+		<br>
+		<input class="calc_input" id="score" type="number">
+		<br>
+		<label class="calc_label" for="items">Items:</label>
+		<br>
+		<input class="calc_input" id="items" type="number">
+		<br>
+		<label class="calc_label" for="baseg">Base:</label>
+		<br>
+		<input class="calc_input" id="baseg" type="number">
+		<br>
+		<br>
+		<button onclick="computegrade()">Calculate</button><br><br>
+		<label class="calc_label" for="grade">Grade:</label>
+		<br>
+		<input class="calc_input" id="grade" type="number" readonly>
+		<br>
+		<label class="calc_label" for="letter">Letter Equivalent:</label>
+		<br>
+		<input class="calc_input" readonly id="letter" type="text">
+		<br>
+		<br>
+		<button  onclick="clearvalue()">Clear</button>
+		<p id = "comment"></p>
+		<a class="HomeBox" href="index.html">
+			Back
+		</a>
+		</center>
+		<script>
+
+		function clearvalue(){
+			document.getElementById("score").value = '';
+			document.getElementById("items").value = '';
+			document.getElementById("baseg").value = '';
+			document.getElementById("grade").value = '';
+			document.getElementById("letter").value = '';
+			document.getElementById("comment").innerHTML = '';
+		}
+
+		function computegrade(){
+			var s,i,b,g,lg,cm,cp
+		
+			s = document.getElementById("score").value*1;
+			
+			i = document.getElementById("items").value*1;
+		if (s <= i) {
+			b = document.getElementById("baseg").value*1;
+			
+			g = b+(s/i)*(100-b);
+			
+			document.getElementById("grade").value=g;
+			 
+			 //  F < 72, D 72-75, C 76-79, C+ 80 - 83, B=84-87, B+ =88-91, A=9-100
+			
+			if (g < 72) lg = 'F'
+			else if (g <= 75) lg = 'D'
+			else if (g <= 79) lg = 'C'
+			else if (g <= 83) lg = 'C+'
+			else if (g <= 87) lg = 'B'
+			else if (g <= 91) lg = 'B+'
+			else if (g <= 100) lg = 'A'
+			
+			document.getElementById("letter").value=lg;
+			
+			switch(lg){
+			case 'F':
+				cm = 'failing';
+				cp = 'a';
+				break;
+			case 'D':
+				cm = 'passing';
+				cp = 'a';
+				break;
+			case 'C':
+				case 'C+':
+						cm = 'average';
+						cp = 'an';
+						break;
+			case 'B':
+				cm = 'good';
+				cp = 'a';
+				break;
+			case 'B+':
+				cm = 'very good';
+				cp = 'a';
+				break;
+			default : 
+				cm = 'excellent';
+				cp = 'an';
+				break;
+					 }
+			
+			document.getElementById("comment").innerHTML= 'This is ' +cp+' '+cm+' grade.';
+					}
+			else {
+				document.getElementById("comment").innerHTML= 'Your score cannot be bigger than the number of items. Please try again.'
+			}
+		}
+		</script>
+		
+	</body>
+</html>
+
+

@@ -1,0 +1,242 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Payroll Calculator</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<style>
+		input, label{
+			text-align: right;
+		}
+		
+		@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&family=Poppins:wght@300&display=swap');
+		body {
+			font-family: 'Poppins', sans-serif;
+			background-color: white;
+			color: black;
+			margin-right: 10%;
+			margin-left: 10%;
+			margin-top: 1%;
+		}
+
+		button{
+			font-family: 'Poppins', sans-serif;
+			color: black;
+			background-color: white;
+			border: 1px solid black;
+			border-radius: 5px;
+			transition: all 0.5s;
+		}
+
+		button:hover{
+			color: white;
+			background-color: black;
+			transition: all 0.5s;
+		}
+
+		.HomeBox{
+			letter-spacing: normal;
+			padding: 5px;
+			font-family: 'Poppins', sans-serif;
+			color: black;
+			background-color: white;
+			border: 1px solid black;
+			border-radius: 5px;
+			transition: all 0.5s;
+		}
+
+		.HomeBox:hover{
+			color: white;
+			background-color: black;
+			transition: all 0.5s;
+		}
+	</style>
+   <h1>Welcome to the Payroll Calculator!</h1>
+	 <div id = "payroll-table">
+			 <label for = "name">Employee Name: </label>
+			 <input id = "name" class = "name_emp" type = "text"><br><br>
+			 <label for = "dayw">Number of Days Worked: </label>
+			 <input id = "dayw" type = "number"><br><br>
+			 <label for = "pd">Daily Rate: </label>
+			 <input id = "pd" type = "number"><br><br>
+			 <label for = "ded">Deduction Amount: </label>
+			 <input id = "ded" type = "number"><br>
+			 <button id = "submit">Submit</button>
+			 <button id = "clearval">Clear</button>
+	 </div> <br>
+
+	 <h3 id = "he">Delete An Employee/List</h3>
+
+	 <div id = "del-table">
+			 <label for = "delitem">Enter Employee No. : </label>
+			 <input id = "delitem" type = "number">
+			 <button id = "del">Remove</button> <br><br>
+			 <button id = "delist">Delete List</button>
+	 </div>
+	 
+	 <div id = "tab">
+			 <h2>Employee table</h2>
+			 <table id = "pay" border = 1>
+					 <thead>
+							 <tr>
+									 <td id = "no">No.</td>
+									 <td class = "dat">Employee Name</td>
+									 <td class = "dat">Days Worked</td>
+									 <td class = "dat">Daily Rate</td>
+									 <td class = "dat">Gross Pay</td>
+									 <td class = "dat">Deduction Amount</td>
+									 <td class = "dat">Net Pay</td>
+							 </tr>
+					 </thead>
+					 <tbody id = "body">
+					 </tbody>
+					 <tfoot>
+							 <tr>
+									 <td></td>
+									 <td></td>
+									 <td></td>
+									 <td></td>
+									 <td></td>
+									 <td>Total Paid: </td>
+									 <td id = "total"></td>
+							 </tr>
+					 </tfoot>
+			 </table>
+	 </div>
+	 
+	 <dialog id = "dlgRemoveCancel">
+			 <form method = "dialog">
+					 <h4 id = "dlgmsg"></h4>
+					 <button id = "btnRemove" value  ="confirm">Confirm</button>
+					 <button id = "btnCancel" value  ="cancel">Cancel</button>
+			 </form>
+	 </dialog>
+
+	 <a class="HomeBox" href="index.html">
+		Home
+	</a>
+
+	 <script>
+	 var tb = [];
+	 function findGross(x, y) {
+			 return x * y;
+	 }  
+	 function findNet(a, b){
+			 return a - b;
+	 }
+	 function showlst() {
+			 var i, l, ln, tbody, tablebod, tablefoot, totalpd;
+
+			 tablebod = document.getElementById("body");
+			 tablebod.innerHTML = ' ';
+			 tablefoot = document.getElementById("total");
+
+			 l = tb.length;
+
+			 for(i = 0, totalpd = 0, tbody = " "; i < l; i++){
+			 ln = i + 1;
+			 tbody += "<tr>"
+					 + "<td>" + ln + "</td>"
+					 + "<td>" + tb[i].name + "</td>"
+					 + "<td>" + tb[i].days + "</td>"
+					 + "<td>" + "₱ " + (tb[i].rate).toFixed(2) + "</td>"
+					 + "<td>" + "₱ " + (tb[i].gross).toFixed(2) + "</td>"
+					 + "<td>" + "₱ " + (tb[i].ded).toFixed(2) + "</td>"
+					 + "<td>" + "₱ " + (tb[i].net).toFixed(2) + "</td>" + "</tr>";
+
+					 totalpd += tb[i].net;
+			 }
+
+			 tablebod.innerHTML = tbody;
+			 tablefoot.innerHTML = "₱ " + (totalpd).toFixed(2);
+	 }
+
+	 function deletelst() {
+			 tb = [];
+	 }
+
+(() => {
+	 document.getElementById("clearval").addEventListener("click", ()=>{
+			 document.getElementById("name").value = '';
+			 document.getElementById("dayw").value = '';
+			 document.getElementById("pd").value = '';
+			 document.getElementById("ded").value = '';
+	 });
+
+	 document.getElementById("submit").addEventListener("click", ()=>{
+			 var tbody = " ";
+			 var profile = {
+					 "name" : "0",
+					 "days" : "0",
+					 "rate" : "0",
+					 "gross" : "0",
+					 "ded" : "0",
+					 "net" : "0",
+			 };
+
+			 profile.name = document.getElementById("name").value;
+			 profile.days = document.getElementById("dayw").value * 1;
+			 profile.rate = document.getElementById("pd").value * 1;
+			 profile.ded = document.getElementById("ded").value * 1;
+
+			 profile.gross = findGross(profile.days, profile.rate);
+			 profile.net = findNet(profile.gross, profile.ded);
+
+			 tb.push(profile);        
+
+			 showlst();
+	 });
+
+	 document.getElementById("del").addEventListener("click", ()=>{
+			 var x, l;
+
+			 x = document.getElementById("delitem").value * 1;
+
+			 --x;
+			 l = tb.length
+
+			 if (x >= 0 && x < l) {
+					 document.getElementById("dlgmsg").innerHTML="Remove this person?"  
+					 dlgRemoveCancel.showModal();  
+			 }
+	 });
+
+	 document.getElementById("delist").addEventListener("click", ()=>{
+			 
+			 document.getElementById('dlgmsg').innerHTML = "Delete the list?"
+			 dlgRemoveCancel.showModal();
+
+	 });
+
+	 btnRemove.addEventListener("click", ()=>{
+			 dlgRemoveCancel.returnValue = "confirm";
+			 dlgRemoveCancel.close("confirm");
+	 });
+
+	 btnCancel.addEventListener("click", ()=>{
+			 dlgRemoveCancel.returnValue = "cancel";
+			 dlgRemoveCancel.close("cancel");
+	 });
+
+	 dlgRemoveCancel.addEventListener("close",(e)=>{
+			 var rst = e.target.returnValue;
+			 var msglbl = document.getElementById("dlgmsg").innerHTML;
+			 if (rst == "confirm") {
+					 if (msglbl == "Delete the list?" ){ 
+							deletelst();
+							showlst();
+					 }  else if (msglbl =="Remove this person?"){
+							 var x = document.getElementById("delitem").value * 1 - 1;
+							 tb.splice(x,1);
+							 showlst();
+							 document.getElementById("delitem").value='';
+
+					 } 
+			 } 
+	 });
+})();
+	 </script>
+</body>
+</html>

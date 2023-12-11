@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset= "utf-8">
+	<title>Factorial Calculator</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<style>
+		input, label{
+			text-align: right;
+		}
+		@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&family=Poppins:wght@300&display=swap');
+		body {
+			font-family: 'Poppins', sans-serif;
+			background-color: white;
+			color: black;
+			margin-right: 10%;
+			margin-left: 10%;
+			margin-top: 1%;
+		}
+
+		button{
+			font-family: 'Poppins', sans-serif;
+			color: black;
+			background-color: white;
+			border: 1px solid black;
+			border-radius: 5px;
+			transition: all 0.5s;
+		}
+
+		button:hover{
+			color: white;
+			background-color: black;
+			transition: all 0.5s;
+		}
+
+		.HomeBox{
+			letter-spacing: normal;
+			padding: 5px;
+			font-family: 'Poppins', sans-serif;
+			color: black;
+			background-color: white;
+			border: 1px solid black;
+			border-radius: 5px;
+			transition: all 0.5s;
+		}
+
+		.HomeBox:hover{
+			color: white;
+			background-color: black;
+			transition: all 0.5s;
+		}
+	</style>
+	<center>
+	<h1></h1>Welcome to the Factorial Calculator!</h1>
+	<br>
+	<br>
+	<label for="input" id="input_label">
+		Provide a number: 
+	</label>
+	<br>
+	<br>
+	<input type="number" id="input">
+	<br>
+	<br>
+	<button id="btn" class="btn">Calculate</button>
+	<button id="btn_clear" class="btn">Clear</button>
+	<br>
+	<br>
+	<label for="factorial_output" id="factorial_label">Nth Factorial</label>
+	<br>
+	<p id="factorial_output"></p>
+	<p id="factorial_partial"></p>
+	<br>
+	<label for="sum_output" id="sum_label">Sum of N numbers</label>
+	<br>
+	<p id="sum_output"></p>
+	<p id="sum_partial"></p>
+	<br>
+	<label for="avg_output" id="avg_label">Average of N numbers</label>
+	<br>
+	<p id="avg_output"></p>
+	<p id="avg_partial"></p>
+	<a class="HomeBox" href="index.html">
+			Back
+		</a>
+	</center>
+	<script>
+		document.getElementById("btn").addEventListener("click", function(){
+			var limit = document.getElementById("input").value*1;
+			var limit_sum = document.getElementById("input").value*1;
+			var limit_avg = document.getElementById("input").value*1;
+			var multiplier = 1
+			var adder = 0
+			var adder_avg = 0
+			var counter = 1
+			var average
+
+			const partialfac = [];
+			const partialsum = [];
+			const partialavg = [];
+
+			while (limit > 1){
+				multiplier *= limit;
+				partialfac.push(multiplier)
+				limit--;
+			}
+
+			do{
+				if (limit_sum == 0) {
+						adder = 0 }
+				else {
+					adder += counter;
+					partialsum.push(adder)
+					counter++
+					}
+				} while(counter <= limit_sum)
+			
+			for(let counter_avg = 1; counter_avg <= limit_avg; counter_avg++){
+				if (limit_avg == 0){
+					adder_avg = 0 }
+				else {
+					adder_avg += counter_avg;
+					partialavg.push(adder_avg)
+					}
+				average = adder_avg/limit_avg
+				}
+			
+			adder = Math.round(adder)
+			multiplier = Math.round(multiplier)
+			average = Math.round(average)
+			document.getElementById("factorial_output").innerHTML = multiplier;
+			document.getElementById("factorial_partial").innerHTML = partialfac.join(" ");
+			document.getElementById("sum_output").innerHTML = adder;
+			document.getElementById("sum_partial").innerHTML = partialsum.join(" ");
+			document.getElementById("avg_output").innerHTML = average;
+			document.getElementById("avg_partial").innerHTML = partialavg.join(" ");
+		}
+	)
+
+	document.getElementById("btn_clear").addEventListener("click", function(){
+			document.getElementById("input").value = ''
+			document.getElementById("factorial_output").innerHTML = ''
+			document.getElementById("factorial_partial").innerHTML = ''
+			document.getElementById("sum_output").innerHTML = ''
+			document.getElementById("sum_partial").innerHTML = ''
+			document.getElementById("avg_output").innerHTML = ''
+			document.getElementById("avg_partial").innerHTML = ''
+	})
+
+	</script>
+</body>
+</html>
