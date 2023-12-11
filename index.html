@@ -1,1 +1,84 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset = "utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Ibañez Works</title>
+		<link rel="stylesheet" href="styles.css">
+	</head>
+	<body>
+		<h1 class="titles">ITC Projects</h1>
+	<div class="container">
+			<div class="arrowbtn" id="arrowbtn">
+				<div class="arrow1" id="arrow1"></div>
+			</div>
+		<ul class="list">
+			<li style="--i:5;"> 
+				<a class="MenuBox" href="gradecomputation.html">
+				Grade Calculator
+				</a>
+			</li>
+			<li style="--i:4;">
+				<a class="MenuBox" href="conversioncalc.html">
+				Conversion Calculator
+				</a>
+			</li>
+			<li style="--i:3;">
+			<a class="MenuBox" href="taxcalculator.html">
+			Tax Calculator
+			</a>
+			</li>
+			<li style="--i:2;">
+			<a class="MenuBox" href="factorial.html">	
+			Factorial Calculator
+			</a>
+			</li>
+			<li style="--i:1;"></a>
+			<a class="MenuBox"" href="payroll.html">
+			Payroll Calculator
+			</a> 
+			</li>
+		</ul>
+	</div>
+		<br>
+
+		<div class="circle"></div>
+		<div class="line9"></div>
+		<div class="line8"></div>
+		<div class="line7"></div>
+		<div class="line6"></div>
+		<div class="line5"></div>
+		<div class="line4"></div>
+		<div class="line3"></div>
+		<div class="line"></div>
+		<div class="line2"></div>
+		<p class="author">Ibañez Luis</p>
+		<span id="date" class="clock"></span>
+		<span id="time" class="clock"></span>
+
+		<script>
+				document.getElementById("arrowbtn").addEventListener("click", function(){
+						document.getElementById("arrowbtn").classList.toggle('active')
+				})
+		</script>
+		<script>
+			// create a function to update the date and time
+			function updateDateTime() {
+			  // create a new `Date` object
+			  const now = new Date();
+	  
+			  // get the current date and time as a string
+			  const currentDate = now.toLocaleDateString("en-US","numeric");
+			  const currentTime = now.toLocaleTimeString("en-US", "numeric");
+	  
+			  // update the `textContent` property of the `span` element with the `id` of `datetime`
+			  document.querySelector('#date').textContent = currentDate;
+			  document.querySelector('#time').textContent = currentTime;
+			}
+	  
+			// call the `updateDateTime` function every second
+			setInterval(updateDateTime, 1000);
+		  </script>
+	</body>
+</html>
 

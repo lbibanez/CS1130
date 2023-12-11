@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset = "utf-8">
+	<title>Conversion Calculator</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<style>
+		input, label{
+			text-align: right;
+		}
+		@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&family=Poppins:wght@300&display=swap');
+		body {
+			font-family: 'Poppins', sans-serif;
+			background-color: white;
+			color: black;
+			margin-right: 10%;
+			margin-left: 10%;
+			margin-top: 1%;
+		}
+
+		button{
+			font-family: 'Poppins', sans-serif;
+			color: black;
+			background-color: white;
+			border: 1px solid black;
+			border-radius: 5px;
+			transition: all 0.5s;
+		}
+
+		button:hover{
+			color: white;
+			background-color: black;
+			transition: all 0.5s;
+		}
+
+		.HomeBox{
+			letter-spacing: normal;
+			padding: 5px;
+			font-family: 'Poppins', sans-serif;
+			color: black;
+			background-color: white;
+			border: 1px solid black;
+			border-radius: 5px;
+			transition: all 0.5s;
+		}
+
+		.HomeBox:hover{
+			color: white;
+			background-color: black;
+			transition: all 0.5s;
+		}
+	</style>
+	<center>
+	<h1>Welcome to the Conversion Calculator!</h1>
+	<h2 id="tempheader">Temperature Converter</h2>
+	<label class="calc_label" id="firstlabel" for="first">Celsius: </label>
+	<br>
+	<input class="calc_input" type="number" id="first" name="celsius">
+	<p>=</p>
+	<label class="calc_label" id="secondlabel" for="second">Fahrenheit:</label>
+	<br>
+	<input class="calc_input" type="number" id="second" name="fahrenheit">
+	<br>
+	<br>
+	<button id="conv">Convert</button>
+	<button id="swap">Swap</button>
+	<button id="clearval">Clear</button>
+	<br>
+	<br>
+	<h3 id="tempheader1">Distance Converter</h3>
+	<label class="calc_label" id="thirdlabel" for="third">Meter:</label>
+	<br>
+	<input class="calc_input" type="number" id="third" name="meter">
+	<p>=</p>
+	<label class="calc_label" id="fourthlabel" for="fourth">Feet:</label>
+	<br>
+	<input class="calc_input" type="number" id="fourth" name="feet">
+	<br>
+	<br>
+	<button id="conv2">Convert</button>
+	<button id="swap2">Swap</button>
+	<button id="clearval2">Clear</button>
+	<br>
+	<br>
+		<a class="HomeBox" href="index.html">
+			Home
+		</a>
+	</center>
+	<script>
+
+document.getElementById("conv").addEventListener("click", function(){
+
+			if (document.getElementById("first").getAttribute('name') == "celsius"){
+				return tofahrenheit(first)
+			}
+			else if(document.getElementById("first").getAttribute('name') == "fahrenheit"){
+				return tocelsius(first)
+			}
+		})
+
+		document.getElementById("swap").addEventListener("click", function(){
+			var tempname1,tempname2;
+
+			tempname1 = document.getElementById("first").getAttribute('name');
+			tempname2 = document.getElementById("second").getAttribute('name');
+			document.getElementById("first").setAttribute("name", tempname2);
+			document.getElementById("second").setAttribute("name", tempname1);
+
+			if (document.getElementById("first").getAttribute('name') == "celsius"){
+				document.getElementById("tempheader").innerHTML = "This is a Celsius to Fahrenheit Converter"
+				document.getElementById("firstlabel").innerHTML = "Celsius:";
+				document.getElementById("secondlabel").innerHTML = "Fahrenheit:";
+			}
+			else if(document.getElementById("first").getAttribute('name') == "fahrenheit"){
+				document.getElementById("tempheader").innerHTML = "This is a Fahrenheit to Celsius Converter"
+				document.getElementById("firstlabel").innerHTML = "Fahrenheit:";
+				document.getElementById("secondlabel").innerHTML = "Celsius:";
+			}
+			
+			return main()
+		})
+	
+		function tofahrenheit(celsius){
+			var c,f;
+			
+			c = document.getElementById("first").value*1;
+
+			f = (9/5)*(c)+32;
+
+			f = Math.round(f)
+			document.getElementById("second").value = f
+
+		}
+
+		function  tocelsius(fahrenheit){
+			var c,f;
+			f = document.getElementById("first").value*1;
+			c = (f - 32)*(5/9)
+
+			c = Math.round(c)
+			document.getElementById("second").value=c;
+		}
+
+		document.getElementById("clearval").addEventListener("click", function(){
+
+			document.getElementById("first").value = ''
+			document.getElementById("second").value = ''
+			document.getElementById("tempheader").innerHTML = 'Temperature Converter'
+		})
+
+		document.getElementById("conv2").addEventListener("click", function(){
+
+			if (document.getElementById("third").getAttribute('name') == "meter"){
+				return tofeet(third)
+			}
+			else if(document.getElementById("third").getAttribute('name') == "feet"){
+				return tometer(third)
+			}
+		})
+
+		document.getElementById("swap2").addEventListener("click", function(){
+			var tempname1,tempname2;
+
+			tempname1 = document.getElementById("third").getAttribute('name');
+			tempname2 = document.getElementById("fourth").getAttribute('name');
+			document.getElementById("third").setAttribute("name", tempname2);
+			document.getElementById("fourth").setAttribute("name", tempname1);
+
+			if (document.getElementById("third").getAttribute('name') == "meter"){
+				document.getElementById("tempheader1").innerHTML = "This is a Meter to Feet Converter"
+				document.getElementById("thirdlabel").innerHTML = "Meter:";
+				document.getElementById("fourthlabel").innerHTML = "Feet:";
+			}
+			else if(document.getElementById("third").getAttribute('name') == "feet"){
+				document.getElementById("tempheader1").innerHTML = "This is a Feet to Meter Converter"
+				document.getElementById("thirdlabel").innerHTML = "Feet:";
+				document.getElementById("fourthlabel").innerHTML = "Meter:";
+			}
+			
+			return distconvert()
+		})
+	
+
+		function tofeet(meter){
+			var m,feet;
+			
+			m = document.getElementById("third").value*1;
+
+			feet = (m*3.28084) ;
+
+			feet = Math.round(feet)
+			document.getElementById("fourth").value = feet;
+
+		}
+
+		function  tometer(feet){
+			var m,feet;
+			feet = document.getElementById("third").value*1;
+			m = (feet/3.28084);
+
+			m = Math.round(m)
+			document.getElementById("fourth").value=m;
+		}
+
+		document.getElementById("clearval2").addEventListener("click", function(){
+
+			document.getElementById("third").value = '';
+			document.getElementById("fourth").value = '';
+			document.getElementById("tempheader1").innerHTML = 'Distance Converter'
+
+		})
+	
+	</script>
+
+</body>
+</html>

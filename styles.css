@@ -1,0 +1,297 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+@font-face {
+    font-family: 'Horizon_Outlined';
+    src: url("horizon_outlined.otf") format("opentype");
+}
+
+@font-face {
+    font-family: 'Horizon';
+    src: url("horizon.otf") format("opentype");
+}
+*{
+    overflow: hidden;
+}
+#date{
+    position: absolute;
+    top: 1%;
+    right: 2%;
+}
+
+#time{
+    position: absolute;
+    top: 4%;
+    right: 2%;
+}
+
+.clock{
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 5px;
+}
+
+.titles{
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: center;
+    letter-spacing: 5px;
+    font-family: 'Horizon_Outlined';
+    font-weight: 599;
+    font-size: 45px;
+}
+
+.author{
+    font-family: 'Horizon';
+    letter-spacing: 5px;
+    font-size: 15px;
+    font-weight: bolder;
+    position: absolute;
+    bottom: 1%;
+    left: 50%;
+    margin-left: -96.5px;
+    opacity: 0.3;
+}
+
+a {
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 5px;
+    text-decoration: none;
+    display: inline;
+    color: white;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    width: 50rem;
+    margin: 10px auto;
+}
+.container .arrowbtn{
+    position: absolute;
+    display: flex;
+    width: 20rem;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid white; */
+    padding: 20px;
+    cursor: pointer;
+    transition: translate 1s;
+}
+
+.arrowbtn .arrow1{
+    border-left: 1px solid white;
+    border-top: 1px solid white;
+    height: 15px;
+    width: 15px;
+    transform: rotate(-135deg);
+    transition: all 1s;
+}
+
+
+.arrowbtn.active {
+    transition: 1s;
+}
+
+.arrowbtn.active .arrow1 {
+    transition: 1s;
+    transform: rotate(45deg);
+}
+
+/* @keyframes translateArrow {
+    0% { transform: translateY(400px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes rotateArrow {
+    0% { transform: rotate(45deg); }
+    100% { transform: rotate(0deg); }
+} */
+
+.container .list{
+    position: absolute;
+    width: 30rem;
+    padding: 0;
+    margin-top: 70px;
+}
+
+
+.list .MenuBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    width: 100%;
+    height: 55px;
+    border: solid 0.5px;
+    background-color: black;
+    padding: 14px;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background-color 1s;
+    transform-origin: top;
+    transform: translateY(-66px);
+    transition: transform 1s ease;
+}
+
+.arrowbtn.active~.list .MenuBox{
+    transition: 1s ease;
+    transform: translateY(0);
+}
+
+.MenuBox:hover,.HomeBox:hover,.menutext:hover{
+    transition: background-color 1s;
+    color: black;
+    background-color: white;
+
+}
+
+.MenuBox:active,.HomeBox:active{
+    opacity: 0.2;
+}
+
+.HomeBox{
+    display: block;
+    height: 5%;
+    width: 5%;
+    border: 5px;
+    border-radius: 10px;
+    border-color: white;
+    color: white;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.calc_input{
+    border: px solid white;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+p {
+ font-size: larger;
+ font-weight: bold;
+}
+
+
+body {
+    margin: 0;
+    color: white;
+    background-color: black;
+}
+
+.line{
+    border-left: 1px solid white;
+    height: 100%;
+    position: absolute;
+    left: 10%;
+    margin-left: -3px;
+    top: 0;
+}
+.line2{
+    border-bottom: solid 1px white;
+    width: 100%;
+    position: absolute;
+    bottom: 15%;
+}
+
+.line3{
+    border-top: solid 1px white;
+    width: 20px;
+    position: absolute;
+    top: 10%;
+    right: 2%
+}
+
+.line4{
+    border-top: solid 1px white;
+    width: 30px;
+    position: absolute;
+    top: 8%;
+    right: 2%
+}
+
+.line5{
+    border-top: 1px solid white;
+    width: 25px;
+    position: absolute;
+    top: 8%;
+    left: 2%;
+}
+
+.line6{
+    border-left: 1px solid white;
+    height: 25px;
+    position: absolute;
+    left: 2%;
+    top: 8%;
+}
+
+.line7{
+    border-bottom: 1px solid white;
+    border-right: 1px solid white;
+    height: 15px;
+    width: 15px;
+    position: absolute;
+    bottom: 7.5%;
+    right: 2.95%;
+}
+
+.line8{
+    border-left: 1px solid white;
+    border-top: 1px solid white;
+    height: 15px;
+    width: 15px;
+    position: absolute;
+    bottom: 5.4%;
+    right: 2%;
+}
+
+.circle{
+    background: black;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    border: 1px solid white;
+    position: absolute;
+    left: 43px;
+    bottom: 9.7%;
+}
+
+.line9{
+    border-bottom: 1px solid white;
+    width: 100%;
+    position: absolute;
+    right: 25%;
+    bottom: 0.1px;
+    transform: rotate(135deg);
+    transform-origin: right;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&family=Poppins:wght@300&display=swap');
+#tab{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 1%;
+    right: 10%;
+}
+
+#payroll-table,     #del-table{
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+#pay{
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 2px;
+    letter-spacing: 1px;
+    
+}

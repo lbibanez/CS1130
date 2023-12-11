@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset ="utf-8">
+	<title>Tax Calculator</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<style>
+		input, label{
+			text-align: right;
+		}
+		
+		@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&family=Poppins:wght@300&display=swap');
+		body {
+			font-family: 'Poppins', sans-serif;
+			background-color: white;
+			color: black;
+			margin-right: 10%;
+			margin-left: 10%;
+			margin-top: 1%;
+		}
+
+		button{
+			font-family: 'Poppins', sans-serif;
+			color: black;
+			background-color: white;
+			border: 1px solid black;
+			border-radius: 5px;
+			transition: all 0.5s;
+		}
+
+		button:hover{
+			color: white;
+			background-color: black;
+			transition: all 0.5s;
+		}
+
+		.HomeBox{
+			letter-spacing: normal;
+			padding: 5px;
+			font-family: 'Poppins', sans-serif;
+			color: black;
+			background-color: white;
+			border: 1px solid black;
+			border-radius: 5px;
+			transition: all 0.5s;
+		}
+
+		.HomeBox:hover{
+			color: white;
+			background-color: black;
+			transition: all 0.5s;
+		}
+	</style>
+	<center>
+	<h1>Welcome to the Tax Calculator</h1>
+	<label class="calc_label" for="first">
+		Taxable Income:
+	</label>
+	<br>
+	<input class="calc_input" type="number" id="first" autocomplete="off">
+	<br>
+	<br>
+	<button id="calctax">Calculate</button>
+	<button id="clearvalue">Clear</button>
+	<br>
+	<br>
+	<label class="calc_label" for="second">
+		Income Tax:
+	</label>
+	<br>
+	<input class="calc_input" id="second" type="number" autocomplete="off">
+	<br>
+	<br>
+	<label class="calc_label" for="third">
+		Income after Tax:
+	</label>
+	<br>
+	<input class="calc_input" id="third" type="number" autocomplete="off" readonly>
+	<br>
+	<br>
+	<a class="HomeBox" href="index.html">
+			Back
+		</a>
+	</center>
+	<script>
+	document.getElementById("clearvalue").addEventListener("click", function(){
+			document.getElementById("first").value = '';
+			document.getElementById("second").value = '';
+			document.getElementById("third").value = '';
+		})
+
+		document.getElementById("calctax").addEventListener("click", function(){
+
+			var income, incometax;
+
+			income = document.getElementById("first").value*1;
+
+			if (income <= 250000) {
+				incometax = 0 
+			document.getElementById("second").value = incometax.toFixed(2);
+			document.getElementById("third").value = income.toFixed(2);
+			}
+			else if(income <= 400000){
+				incometax = ((income-250000)*(0.20));
+				income -= incometax
+			document.getElementById("second").value = incometax.toFixed(2);
+			document.getElementById("third").value = income.toFixed(2);
+			}
+			else if(income <= 800000){
+				incometax = 30000 + ((income-400000)*(0.25));
+				income -= incometax
+			document.getElementById("second").value = incometax.toFixed(2);
+			document.getElementById("third").value = income.toFixed(2);
+			}
+			else if(income <= 2000000){
+				incometax = 130000 + ((income-800000)*(0.30));
+				income -= incometax
+			document.getElementById("second").value = incometax.toFixed(2);
+			document.getElementById("third").value = income.toFixed(2);
+			}
+			else if(income <= 8000000){
+				incometax = 490000 + ((income-2000000)*(0.32));
+				income -= incometax
+			document.getElementById("second").value = incometax.toFixed(2);
+			document.getElementById("third").value = income.toFixed(2);
+			}
+			else if(income > 8000000){
+				incometax = 2410000 + ((income-8000000)*(0.35));
+				income -= incometax
+			document.getElementById("second").value = incometax.toFixed(2);
+			document.getElementById("third").value = income.toFixed(2);
+			}
+			
+		})
+
+	</script>
+</body>
+</html>
