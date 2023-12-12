@@ -28,6 +28,7 @@
 			border: 1px solid black;
 			border-radius: 5px;
 			transition: all 0.5s;
+			padding: 10px;
 		}
 
 		button:hover{
@@ -73,7 +74,6 @@
 			 <label for = "delitem">Enter Employee No. : </label>
 			 <input id = "delitem" type = "number">
 			 <button id = "del">Remove</button> <br><br>
-			 <button id = "delist">Delete List</button>
 	 </div>
 	 
 	 <div id = "tab">
@@ -104,6 +104,9 @@
 							 </tr>
 					 </tfoot>
 			 </table>
+			 <br>
+			 <br>
+			 <button id = "delist">Delete List</button>
 	 </div>
 	 
 	 <dialog id = "dlgRemoveCancel">
@@ -187,6 +190,11 @@
 			 tb.push(profile);        
 
 			 showlst();
+
+			 document.getElementById("name").value = '';
+			 document.getElementById("dayw").value = '';
+			 document.getElementById("pd").value = '';
+			 document.getElementById("ded").value = '';
 	 });
 
 	 document.getElementById("del").addEventListener("click", ()=>{
@@ -198,14 +206,14 @@
 			 l = tb.length
 
 			 if (x >= 0 && x < l) {
-					 document.getElementById("dlgmsg").innerHTML="Remove this person?"  
+					 document.getElementById("dlgmsg").innerHTML="Remove this employee?"  
 					 dlgRemoveCancel.showModal();  
 			 }
 	 });
 
 	 document.getElementById("delist").addEventListener("click", ()=>{
 			 
-			 document.getElementById('dlgmsg').innerHTML = "Delete the list?"
+			 document.getElementById('dlgmsg').innerHTML = "Delete the whole list?"
 			 dlgRemoveCancel.showModal();
 
 	 });
@@ -224,10 +232,10 @@
 			 var rst = e.target.returnValue;
 			 var msglbl = document.getElementById("dlgmsg").innerHTML;
 			 if (rst == "confirm") {
-					 if (msglbl == "Delete the list?" ){ 
+					 if (msglbl == "Delete the whole list?" ){ 
 							deletelst();
 							showlst();
-					 }  else if (msglbl =="Remove this person?"){
+					 }  else if (msglbl == "Remove this employee?"){
 							 var x = document.getElementById("delitem").value * 1 - 1;
 							 tb.splice(x,1);
 							 showlst();
